@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { apiCall } from './API';
+import GoogleButton from './GoogleButton';
 
-function App() {
+const App = () => {
+  const [studies, setStudies] = useState<[Study]>();
+
+  useEffect(() => {
+    fetch(apiCall('/study/study_list'))
+      .then((res) => res.json())
+      .then(setStudies);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {'All Studies'}
+      {studies?.map((study) => (
+        <pre key={study._id}>{JSON.stringify(study)}</pre>
+      ))}
+      <GoogleButton />
     </div>
   );
-}
+};
 
 export default App;
