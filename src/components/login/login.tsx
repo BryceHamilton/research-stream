@@ -7,7 +7,6 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const submitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
