@@ -1,6 +1,13 @@
 export interface RootState {
-  user: any;
-  isResearcher: boolean;
-  studies: any;
-  myDrafts: any[];
+  studies: [Study] | [];
+  user: string;
 }
+
+export const RECEIVE_STUDIES = 'RECEIVE_STUDIES';
+
+export interface ReceiveStudiesAction {
+  type: typeof RECEIVE_STUDIES;
+  studies: [Study];
+}
+
+export type StudyActionTypes = ReceiveStudiesAction;

@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
+import { trimString } from '../../utils/strings';
 
-const StudyCard = (props) => {
+const StudyCard = (props: any) => {
   const {
     study: { title, datePosted, _id, purpose },
     fadeUp = false,
@@ -15,7 +16,6 @@ const StudyCard = (props) => {
   } = props;
   const studyLink = props.study && `study${editable ? 'Editor' : ''}/${_id}`;
   const dateFormatted = moment(datePosted).format('MMMM Do YYYY');
-  const trimmedPurpose = purpose.substring(0, 275);
   return (
     <CardContainer>
       <CardBody
@@ -23,7 +23,7 @@ const StudyCard = (props) => {
         data-aos-delay={fadeUp ? '200' : ''}
         data-aos-once={fadeUp ? 'true' : ''}
       >
-        <LocationLink>Kingston, ON</LocationLink>
+        <LocationLink to=''>Kingston, ON</LocationLink>
         <h5>
           {researcher ? (
             <StudyTitle to='' onClick={setCalendar}>
@@ -37,7 +37,7 @@ const StudyCard = (props) => {
           <i className='far fa-clock mr-2' />
           {`Added ${dateFormatted}`}
         </DatePosted>
-        <StudyPurpose>{`${trimmedPurpose} ...`}</StudyPurpose>
+        <StudyPurpose>{`${trimString(purpose)} ...`}</StudyPurpose>
         <LearnMore to={studyLink}>
           {researcher ? 'Edit Study' : 'Learn More'}
           <i className='fa fa-long-arrow-alt-right ml-2' />

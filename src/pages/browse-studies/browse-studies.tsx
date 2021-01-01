@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import StudyCard from '../../components/study-card';
 import Navbar from '../../components/navbar';
 import { Container } from '../../components/base/container';
-import { apiCall } from '../../api';
-// import Footer from './Footer.jsx';
+import { RootState } from '../../store/types';
+import GridBox from '../../components/base/grid-box';
 
-const Browse = (props: any) => {
-  const [studies, setStudies] = useState<[Study]>();
-
-  useEffect(() => {
-    fetch(apiCall('/study/study_list'))
-      .then((res) => res.json())
-      .then(setStudies);
-  }, []);
-
+const Browse = () => {
+  const studies: Study[] = useSelector((state: RootState) => state.studies);
   useEffect(() => window.scroll(0, 0), []);
 
   return (
@@ -27,13 +21,12 @@ const Browse = (props: any) => {
       <PaddedSection>
         <Container>
           <GridBox>
-            {studies?.map((study: any) => (
+            {(studies as Study[])?.map((study: Study) => (
               <StudyCard study={study} />
             ))}
           </GridBox>
         </Container>
       </PaddedSection>
-      {/* <Footer onLandingPage={false} /> */}
     </div>
   );
 };
@@ -49,6 +42,7 @@ const SectionHeader = styled.section`
 `;
 
 const BrowseHeader = styled.h1`
+  color: white;
   font-size: 4.5rem;
   line-height: 1.3;
   font-weight: 700 !important;
@@ -62,13 +56,6 @@ const SubHeading = styled.p`
 
 const PaddedSection = styled.section`
   padding: 6rem 0;
-`;
-
-const GridBox = styled.div`
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-column-gap: 20px;
-  grid-row-gap: 25px;
 `;
 
 export default Browse;
