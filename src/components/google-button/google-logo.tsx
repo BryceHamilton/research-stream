@@ -1,4 +1,3 @@
-// TODO: move in svg file
 export default (
   <svg width='18' height='18' xmlns='http://www.w3.org/2000/svg'>
     <g fill='#000' fill-rule='evenodd'>
