@@ -52,5 +52,4 @@ const StyledLink = styled(Link)`
     color: black;
   }
 `;
-
 export default Login;

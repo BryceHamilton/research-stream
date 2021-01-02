@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 import StudyCard from '../../components/study-card';
 import Navbar from '../../components/navbar';
 import { Container } from '../../components/base/container';
-import { RootState } from '../../store/types';
+import { AppState } from '../../store/';
 import GridBox from '../../components/base/grid-box';
 
 const Browse = () => {
-  const studies: Study[] = useSelector((state: RootState) => state.studies);
+  const studies: Study[] = useSelector((state: AppState) => state.studies);
   useEffect(() => window.scroll(0, 0), []);
 
   return (

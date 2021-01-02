@@ -4,13 +4,13 @@ import { Container, Row } from '../../../components/base/container';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import AOS from 'aos';
-import { RootState } from '../../../store/types';
+import { AppState } from '../../../store';
 import StudyCard from '../../../components/study-card';
 import GridBox from '../../../components/base/grid-box';
 AOS.init();
 
 const NewlyAdded = () => {
-  const studies: Study[] | [] = useSelector((state: RootState) =>
+  const studies: Study[] | [] = useSelector((state: AppState) =>
     state.studies.slice(0, 3),
   );
   return (

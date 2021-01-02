@@ -2,8 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer } from '../../../components/base/container';
+import GoogleButton from '../../../components/google-button';
 
-const LandingNavbar = ({ openModal }: any) => (
+const LandingNavbar: React.FunctionComponent<{ openModal: () => void }> = ({
+  openModal,
+}) => (
   <PaddingNav>
     <StyledContainer>
       <NavIcon to='/browse'>
@@ -17,15 +20,7 @@ const LandingNavbar = ({ openModal }: any) => (
       </NavIcon>
       <NavList>
         <li>
-          <NavLink to='/browse'>Browse</NavLink>
-        </li>
-        <li>
-          <NavLink onClick={openModal} to=''>
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/signup'>Sign Up</NavLink>
+          <GoogleButton />
         </li>
       </NavList>
     </StyledContainer>

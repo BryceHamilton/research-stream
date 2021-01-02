@@ -2,14 +2,14 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { RootState } from '../../store/types';
+import { AppState } from '../../store';
 
 const Navbar: React.FunctionComponent<{ redirect: string }> = ({
   redirect = '/browse',
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector((state: AppState) => state.user);
 
   const logOut = () => {
     dispatch({ type: 'logOut' });

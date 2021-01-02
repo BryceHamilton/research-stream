@@ -1,8 +1,3 @@
-export interface RootState {
-  studies: [Study] | [];
-  user: string;
-}
-
 export const RECEIVE_STUDIES = 'RECEIVE_STUDIES';
 
 export interface ReceiveStudiesAction {
@@ -10,4 +5,4 @@ export interface ReceiveStudiesAction {
   studies: [Study];
 }
 
-export type StudyActionTypes = ReceiveStudiesAction;
+export type StudyAction = ReceiveStudiesAction;

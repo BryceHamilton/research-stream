@@ -14,3 +14,20 @@ type Study = {
   timeSlots: [string];
   datePosted: Date;
 };
+
+type User = {
+  googleId: string;
+  imageUrl: string;
+  email: string;
+  name: string;
+  givenName: string;
+  familyName: string;
+};
+
+type GoogleResponse = {
+  googleId: string;
+  tokenId: string;
+  accessToken: string;
+  tokenObj: Object;
+  profileObj: User;
+};
