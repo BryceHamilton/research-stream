@@ -3,10 +3,10 @@ import { RECEIVE_STUDIES, StudyAction } from './types';
 
 export type StudiesState = Study[];
 
-export const initialState: StudiesState = [];
+export const initialStudiesState: StudiesState = [];
 
 const reducer: Reducer<StudiesState, StudyAction> = (
-  state = initialState,
+  state = initialStudiesState,
   action,
 ): StudiesState => {
   switch (action.type) {

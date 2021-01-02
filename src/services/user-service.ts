@@ -34,15 +34,4 @@ const userService: UserService = {
   logout: () => localStorage.removeItem('user'),
 };
 
-// export const authHeader = () => {
-//   // return authorization header with jwt token
-//   const user = JSON.parse(localStorage.getItem('user') || '');
-
-//   if (user?.token) {
-//     return { Authorization: 'Bearer ' + user.token };
-//   } else {
-//     return {};
-//   }
-// };
-
 export default userService;

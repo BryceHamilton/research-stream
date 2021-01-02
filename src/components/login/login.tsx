@@ -1,55 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { GoogleLogin } from 'react-google-login';
+import { useDispatch } from 'react-redux';
+import { userActions } from '../../store/user/actions';
 import GoogleButton from '../google-button';
+require('dotenv').config();
+
+const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 const Login: React.FunctionComponent = () => {
+  const dispatch = useDispatch();
+  const handleLogin = (response: GoogleResponse): void => {
+    userActions.login(response)(dispatch);
+  };
   return (
-    <div>
-      <LoginForm>
-        <LoginHeader>Please sign in</LoginHeader>
-        <MarginGoogleButton />
-        <br />
-        <p>
-          Don't have an account? Sign up
-          <StyledLink to='/signup'>&nbsp;here</StyledLink>
-        </p>
-        <CopyRight>&copy; 2020</CopyRight>
-      </LoginForm>
-    </div>
+    <GoogleLogin
+      clientId={REACT_APP_GOOGLE_CLIENT_ID || ''}
+      render={(renderProps) => <GoogleButton {...renderProps} />}
+      onSuccess={handleLogin}
+      onFailure={handleLogin}
+      cookiePolicy={'single_host_origin'}
+    />
   );
 };
 
-const MarginGoogleButton = styled(GoogleButton)`
-  margin: 2rem;
-`;
-
-const LoginForm = styled.div`
-  text-align: center;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
-`;
-
-const LoginHeader = styled.h1`
-  font-weight: 400;
-  margin-bottom: 0;
-  font-size: 1.75rem;
-  line-height: 1.3;
-  margin-top: 60px;
-`;
-
-const CopyRight = styled.p`
-  color: #868e96;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-`;
-
-const StyledLink = styled(Link)`
-  color: #868e96;
-  text-decoration: none;
-  &:hover {
-    color: black;
-  }
-`;
 export default Login;

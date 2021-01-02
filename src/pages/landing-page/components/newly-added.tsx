@@ -30,7 +30,7 @@ const NewlyAdded = () => {
         </HeaderRow>
         <GridBox>
           {(studies as Study[]).map((study: Study) => (
-            <StudyCard study={study} fadeUp />
+            <StudyCard key={study._id} study={study} fadeUp />
           ))}
         </GridBox>
       </Container>

@@ -1,20 +1,16 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppState } from '../../store';
+import { userActions } from '../../store/user/actions';
+import Login from '../login';
 
 const Navbar: React.FunctionComponent<{ redirect: string }> = ({
   redirect = '/browse',
 }) => {
-  const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector((state: AppState) => state.user);
-
-  const logOut = () => {
-    dispatch({ type: 'logOut' });
-    history.push('/');
-  };
+  const { isAuthenticated } = useSelector((state: AppState) => state.user);
 
   return (
     <header>
@@ -27,14 +23,18 @@ const Navbar: React.FunctionComponent<{ redirect: string }> = ({
           </div>
           <NavList>
             <li>
-              <NavLink to={user ? '/myStudies' : '/signup'}>
-                {user ? 'My Studies' : 'Sign Up'}
-              </NavLink>
+              {/* <NavLink to={isAuthenticated ? '/myStudies' : '/signup'}>
+                {isAuthenticated ? 'My Studies' : 'Sign Up'}
+              </NavLink> */}
             </li>
             <li>
-              <NavLink to='' onClick={logOut}>
-                {user ? 'Logout' : 'Login'}
-              </NavLink>
+              {isAuthenticated ? (
+                <NavLink to='' onClick={userActions.logout(dispatch)}>
+                  Logout
+                </NavLink>
+              ) : (
+                <Login />
+              )}
             </li>
           </NavList>
         </ContainerFluid>

@@ -24,10 +24,4 @@ type User = {
   familyName: string;
 };
 
-type GoogleResponse = {
-  googleId: string;
-  tokenId: string;
-  accessToken: string;
-  tokenObj: Object;
-  profileObj: User;
-};
+type GoogleResponse = GoogleLoginResponse | GoogleLoginResponseOffline;

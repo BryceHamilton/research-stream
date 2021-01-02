@@ -1,11 +1,6 @@
 import React from 'react';
-import GoogleLogin from 'react-google-login';
 import styled from 'styled-components';
 import googleLogo from './google-logo';
-// import userActions from '../../actions/user-actions';
-require('dotenv').config();
-
-const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 const GoogleButton: React.FunctionComponent<{
   onClick: () => any;
@@ -19,22 +14,7 @@ const GoogleButton: React.FunctionComponent<{
   );
 };
 
-const NavGoogleButton: React.FunctionComponent = () => {
-  const handleLogin = (response: any): void => {
-    console.log(response);
-  };
-  return (
-    <GoogleLogin
-      clientId={REACT_APP_GOOGLE_CLIENT_ID || ''}
-      render={(renderProps) => <GoogleButton {...renderProps} />}
-      onSuccess={handleLogin}
-      onFailure={handleLogin}
-      cookiePolicy={'single_host_origin'}
-    />
-  );
-};
-
-export default NavGoogleButton;
+export default GoogleButton;
 
 const StyledLink = styled.button`
   &:hover {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexContainer } from '../../../components/base/container';
-import GoogleButton from '../../../components/google-button';
+import Login from '../../../components/login';
 
 const LandingNavbar: React.FunctionComponent<{ openModal: () => void }> = ({
   openModal,
@@ -20,7 +20,7 @@ const LandingNavbar: React.FunctionComponent<{ openModal: () => void }> = ({
       </NavIcon>
       <NavList>
         <li>
-          <GoogleButton />
+          <Login />
         </li>
       </NavList>
     </StyledContainer>

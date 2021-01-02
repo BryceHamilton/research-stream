@@ -1,29 +1,30 @@
-import { UserActionType } from './types';
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-} from '../../constants/user';
 import { Reducer } from 'redux';
+import { UserActionType } from './types';
+import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from '../../constants/user';
 
-export type UserState = User;
-
-const initialState: UserState = {
-  googleId: '',
-  imageUrl: '',
-  email: '',
-  name: '',
-  givenName: '',
-  familyName: '',
+export type UserState = {
+  isAuthenticated: boolean;
+  user?: User;
 };
 
+const localStorageUser = localStorage.getItem('user');
+const user = localStorageUser ? JSON.parse(localStorageUser) : null;
+
+export const initialUserState: UserState = user
+  ? { isAuthenticated: true, user }
+  : { isAuthenticated: false };
+
 const reducer: Reducer<UserState, UserActionType> = (
-  state = initialState,
+  state = initialUserState,
   action,
-): User => {
+): UserState => {
   switch (action.type) {
-    case LOGIN_REQUEST:
-      return action.user;
+    case LOGIN_SUCCESS:
+      return { isAuthenticated: true, user: action.user };
+    case LOGIN_FAILURE:
+      return { isAuthenticated: false };
+    case LOGOUT:
+      return { isAuthenticated: false };
     default:
       return state;
   }
