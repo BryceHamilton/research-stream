@@ -13,7 +13,7 @@ const App = () => {
     const fetchUser = async () => {
       console.log('fetching user');
       const res = await fetch(apiCall('/auth/user'), {
-        credentials: 'same-origin',
+        credentials: 'include',
       });
       const user = await res.json();
       console.log(user);
