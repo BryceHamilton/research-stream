@@ -16,11 +16,6 @@ const LandingNavbar = ({ openModal }: any) => (
         />
       </NavIcon>
       <NavList>
-        {/* <li>
-          <NavLink to='' data-scroll href='#home'>
-            Home
-          </NavLink>
-        </li> */}
         <li>
           <NavLink to='/browse'>Browse</NavLink>
         </li>
@@ -60,7 +55,6 @@ const NavLink = styled(Link)`
 
   &:hover {
     color: #082e6d;
-    text-decoration: none;
   }
 `;
 

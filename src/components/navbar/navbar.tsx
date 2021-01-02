@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { RootState } from '../../store/types';
 
-const Navbar = () => {
+const Navbar: React.FunctionComponent<{ redirect: string }> = ({
+  redirect = '/browse',
+}) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
@@ -19,7 +21,7 @@ const Navbar = () => {
       <StyledNav>
         <ContainerFluid>
           <div>
-            <Link to='/browse'>
+            <Link to={redirect}>
               <LogoImg src='/logo.png' height='150px' width='150px' alt='' />
             </Link>
           </div>

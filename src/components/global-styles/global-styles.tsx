@@ -17,4 +17,8 @@ export default createGlobalStyle`
         line-height: 1.3;
         color: #082e6d;
     }
+
+    a:hover {
+    text-decoration: none;
+  }
     `;

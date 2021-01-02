@@ -60,6 +60,7 @@ const CardBody = styled.div`
 `;
 
 const LocationLink = styled(Link)`
+  cursor: default;
   letter-spacing: 0.2em;
   font-size: 0.875rem;
   text-transform: uppercase;
@@ -69,6 +70,9 @@ const LocationLink = styled(Link)`
 const StudyTitle = styled(Link)`
   color: #343a40 !important;
   margin-top: 0.5rem;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const DatePosted = styled.p`

@@ -3,9 +3,9 @@ import googleLogo from './google-logo';
 import styled from 'styled-components';
 import { apiCall } from '../../api';
 
-const GoogleButton = () => {
+const GoogleButton: React.FunctionComponent = ({ ...rest }) => {
   return (
-    <StyledLink href={apiCall('/auth/google')} target=''>
+    <StyledLink href={apiCall('/auth/google')} {...rest}>
       <StyledDiv>{googleLogo}</StyledDiv>
       <StyledSpan>Sign in with Google</StyledSpan>
     </StyledLink>
@@ -13,8 +13,10 @@ const GoogleButton = () => {
 };
 export default GoogleButton;
 
-// TODO: rename
 const StyledLink = styled.a`
+  &:hover {
+    color: black;
+  }
   text-decoration: none;
   background-color: rgb(255, 255, 255);
   display: inline-flex;

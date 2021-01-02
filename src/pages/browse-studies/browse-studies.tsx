@@ -13,7 +13,7 @@ const Browse = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar redirect='/' />
       <SectionHeader>
         <BrowseHeader>Browse</BrowseHeader>
         <SubHeading>Search For Studies</SubHeading>

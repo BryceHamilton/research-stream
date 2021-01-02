@@ -22,10 +22,10 @@ const NewlyAdded = () => {
             <h2>Studies</h2>
           </PaddedDiv>
           <SeeAllStudies>
-            <Link to='/browse' className='text-muted text-sm'>
+            <UnderlinedLink to='/browse' className='text-muted text-sm'>
               See all studies
               <i className='fas fa-angle-double-right ml-2' />
-            </Link>
+            </UnderlinedLink>
           </SeeAllStudies>
         </HeaderRow>
         <GridBox>
@@ -67,6 +67,12 @@ const SeeAllStudies = styled(PaddedDiv)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+`;
+
+const UnderlinedLink = styled(Link)`
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export default NewlyAdded;
