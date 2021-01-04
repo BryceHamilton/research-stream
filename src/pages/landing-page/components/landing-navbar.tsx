@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import { FlexContainer } from '../../../components/base/container';
 import Login from '../../../components/login';
 
-const LandingNavbar: React.FunctionComponent<{ openModal: () => void }> = ({
-  openModal,
-}) => (
+const LandingNavbar: React.FunctionComponent = () => (
   <PaddingNav>
     <StyledContainer>
       <NavIcon to='/browse'>

@@ -4,7 +4,11 @@ type Study = {
   researcher: string;
   purpose: string;
   lab: string;
-  location: string;
+  location: {
+    lat: number;
+    lng: number;
+    address: string;
+  };
   compensation: string;
   whoIsConducting: string;
   benefits: string;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
+export const Container = styled.div`
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
@@ -25,7 +25,7 @@ const Container = styled.div`
   }
 `;
 
-const FlexContainer = styled(Container)`
+export const FlexContainer = styled(Container)`
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
@@ -33,12 +33,10 @@ const FlexContainer = styled(Container)`
   text-align: center;
 `;
 
-const Row = styled.div`
+export const Row = styled.div`
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
 `;
-
-export { Container, FlexContainer, Row };

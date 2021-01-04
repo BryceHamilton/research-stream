@@ -7,8 +7,9 @@ import { Container } from '../../components/base/container';
 import { AppState } from '../../store/';
 import GridBox from '../../components/base/grid-box';
 
-const Browse = () => {
+const Browse: React.FunctionComponent = () => {
   const studies: Study[] = useSelector((state: AppState) => state.studies);
+
   useEffect(() => window.scroll(0, 0), []);
 
   return (
@@ -22,7 +23,7 @@ const Browse = () => {
         <Container>
           <GridBox>
             {(studies as Study[])?.map((study: Study) => (
-              <StudyCard study={study} />
+              <StudyCard key={study._id} study={study} />
             ))}
           </GridBox>
         </Container>

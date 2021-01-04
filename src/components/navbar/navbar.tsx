@@ -6,7 +6,7 @@ import { AppState } from '../../store';
 import { userActions } from '../../store/user/actions';
 import Login from '../login';
 
-const Navbar: React.FunctionComponent<{ redirect: string }> = ({
+const Navbar: React.FunctionComponent<{ redirect?: string }> = ({
   redirect = '/browse',
 }) => {
   const dispatch = useDispatch();
@@ -23,9 +23,7 @@ const Navbar: React.FunctionComponent<{ redirect: string }> = ({
           </div>
           <NavList>
             <li>
-              {/* <NavLink to={isAuthenticated ? '/myStudies' : '/signup'}>
-                {isAuthenticated ? 'My Studies' : 'Sign Up'}
-              </NavLink> */}
+              {/* {isAuthenticated && <NavLink to='/myStudies'>My Studies</NavLink>} */}
             </li>
             <li>
               {isAuthenticated ? (
@@ -51,6 +49,7 @@ const StyledNav = styled.nav`
   left: 0;
   background-color: #fff !important;
   padding: 1rem 1rem;
+  z-index: 1;
 `;
 
 const ContainerFluid = styled.div`

@@ -1,39 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Modal from 'react-bootstrap/Modal';
 import { FlexContainer } from '../../components/base/container';
-import PrimaryButton from '../../components/primary-button';
 import LandingNavbar from './components/landing-navbar';
 import NewlyAdded from './components/newly-added';
 import Login from '../../components/login';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../store';
 
-const LoginModal = ({ modalOpen, closeModal }: any) => (
-  <Modal
-    show={modalOpen}
-    style={{ opacity: '1' }}
-    onHide={closeModal}
-    className='login-modal'
-  >
-    <Modal.Body>
-      <Login />
-    </Modal.Body>
-  </Modal>
-);
+const LandingPage: React.FunctionComponent = () => {
+  const { isAuthenticated } = useSelector((state: AppState) => state.user);
 
-const LandingPage = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  useEffect(() => window.scroll(0, 0), []);
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
+  if (isAuthenticated) return <Redirect to='/browse' />;
 
-  const closeModal = () => {
-    setModalOpen(false);
-  };
   return (
     <div>
-      <LandingNavbar openModal={openModal} />
-      <LoginModal modalOpen={modalOpen} closeModal={closeModal} />
+      <LandingNavbar />
       <div style={{ marginTop: '30px' }}>
         <FlexContainer>
           <div>
@@ -42,12 +26,7 @@ const LandingPage = () => {
               Connecting Researchers and Research Participants
             </SubHeader>
             <ButtonContainer>
-              <PrimaryButton to='/signup'>
-                Create an account today!
-              </PrimaryButton>
-              <PrimaryButton to='/researcherSignup'>
-                Sign up as a Researcher
-              </PrimaryButton>
+              <Login custom='Sign up as a Researcher' />
             </ButtonContainer>
           </div>
         </FlexContainer>

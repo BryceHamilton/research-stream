@@ -7,17 +7,17 @@ import {
 } from './types';
 
 export const userActions = {
-  login: (response: GoogleResponse) => {
-    return (dispatch: (action: UserActionType) => void) => {
-      userService.login(response).then(
-        (user: User) => {
-          dispatch(success(user));
-        },
-        (error: Error) => {
-          dispatch(failure(error));
-        },
-      );
-    };
+  login: (dispatch: (action: UserActionType) => void) => (
+    response: GoogleResponse,
+  ) => {
+    userService.login(response).then(
+      (user: User) => {
+        dispatch(success(user));
+      },
+      (error: Error) => {
+        dispatch(failure(error));
+      },
+    );
   },
 
   logout: (dispatch: (action: UserActionType) => void) => () => {
