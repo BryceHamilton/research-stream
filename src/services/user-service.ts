@@ -1,4 +1,4 @@
-const { REACT_APP_API_URL } = process.env;
+import { api } from '../api';
 
 interface UserService {
   login: (response: GoogleResponse) => Promise<User>;
@@ -24,7 +24,7 @@ const userService: UserService = {
       body: JSON.stringify({ user }),
     };
 
-    return fetch(`${REACT_APP_API_URL}/auth/login`, requestOptions)
+    return fetch(api('/auth/login'), requestOptions)
       .then(handleResponse)
       .then((user: User) => {
         localStorage.setItem('user', JSON.stringify(user));
