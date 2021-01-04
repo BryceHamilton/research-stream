@@ -7,22 +7,16 @@ import { trimString } from '../../utils/strings';
 const StudyCard = (props: any) => {
   const {
     study: { title, datePosted, _id, purpose },
-    fadeUp = false,
     isDraft,
     deleteDraft,
-    editable,
     researcher,
     setCalendar,
   } = props;
-  const studyLink = props.study && `study${editable ? 'Editor' : ''}/${_id}`;
+
   const dateFormatted = moment(datePosted).format('MMMM Do YYYY');
   return (
     <CardContainer>
-      <CardBody
-        data-aos={fadeUp ? `fade-up` : ''}
-        data-aos-delay={fadeUp ? '200' : ''}
-        data-aos-once={fadeUp ? 'true' : ''}
-      >
+      <CardBody>
         <LocationLink to=''>Kingston, ON</LocationLink>
         <h5>
           {researcher ? (
@@ -30,7 +24,7 @@ const StudyCard = (props: any) => {
               {title}
             </StudyTitle>
           ) : (
-            <StudyTitle to={studyLink}>{title}</StudyTitle>
+            <StudyTitle to={`study/${_id}`}>{title}</StudyTitle>
           )}
         </h5>
         <DatePosted>
@@ -38,7 +32,7 @@ const StudyCard = (props: any) => {
           {`Added ${dateFormatted}`}
         </DatePosted>
         <StudyPurpose>{`${trimString(purpose)} ...`}</StudyPurpose>
-        <LearnMore to={studyLink}>
+        <LearnMore to={`study/${_id}`}>
           {researcher ? 'Edit Study' : 'Learn More'}
           <i className='fa fa-long-arrow-alt-right ml-2' />
         </LearnMore>
