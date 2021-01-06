@@ -60,6 +60,7 @@
   "proxy": "https://research-stream.herokuapp.com",
   "devDependencies": {
     "@types/aos": "^3.0.3",
+    "@types/react-big-calendar": "^0.24.8",
     "react-app-rewired": "^2.1.8"
   }
 }

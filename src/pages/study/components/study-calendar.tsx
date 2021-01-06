@@ -1,58 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+import { SelectedTimeSlots, TimeSlot } from '../studyUtils';
 import { useSelector } from 'react-redux';
-import { addSelectedTime, removeSelectedTime } from '../studyUtils.js';
+import { addSelectedTime, removeSelectedTime } from '../studyUtils';
 
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import './StudyCalendar.css';
+import { AppState } from '../../../store';
 
 const localizer = momentLocalizer(moment);
 
-const DragAndDropCalendar = withDragAndDrop(Calendar);
+const DragAndDropCalendar = withDragAndDrop<any, any>(Calendar);
 
-const StudyCalendar = ({
-  timeSlots,
-  selectedTimeSlots,
-  setSelectedTimeSlots,
-}) => {
-  const [events, setEvents] = useState([]);
-  const [numOfSelectedSlots, setNumOfSelectedSlots] = useState(0);
-  const user = useSelector(({ user }) => user);
+const StudyCalendar: React.FunctionComponent<{
+  timeSlots: TimeSlot[];
+  selectedTimeSlots: SelectedTimeSlots;
+  setSelectedTimeSlots: (newSlots: SelectedTimeSlots) => void;
+}> = ({ timeSlots, selectedTimeSlots, setSelectedTimeSlots }) => {
+  const [events, setEvents] = useState<TimeSlot[]>([]);
+  const [numOfSelectedSlots, setNumOfSelectedSlots] = useState<number>(0);
+  const user = useSelector((state: AppState) => state.user.user);
 
   useEffect(() => {
     let selectedTimesCounter = 0;
-    let selectedEvents = {};
-    let events = [];
+    let selectedEvents: SelectedTimeSlots = {};
+    let events: TimeSlot[] = [];
     if (timeSlots.length) {
-      events = timeSlots.map((event) => {
-        if (Object.keys(event.applicants).includes(user)) {
+      events = timeSlots.map((event: TimeSlot) => {
+        if (Object.keys(event.applicants).includes(user?.googleId || '')) {
           selectedTimesCounter++;
           selectedEvents[event.id] = event;
           return {
             ...event,
             selected: true,
-            start: new Date(event.start),
-            end: new Date(event.end),
+            start: new Date(event.start || ''),
+            end: new Date(event.end || ''),
           };
         }
 
-        if (event.confirmed.includes(user)) {
+        if (event.confirmed.includes(user?.googleId || '')) {
           return {
             ...event,
             selected: false,
             userConfirmed: true,
-            start: new Date(event.start),
-            end: new Date(event.end),
+            start: new Date(event.start || ''),
+            end: new Date(event.end || ''),
           };
         }
         return {
           ...event,
           selected: false,
-          start: new Date(event.start),
-          end: new Date(event.end),
+          start: new Date(event.start || ''),
+          end: new Date(event.end || ''),
         };
       });
     }
@@ -61,7 +62,10 @@ const StudyCalendar = ({
     setNumOfSelectedSlots(selectedTimesCounter);
   }, [setSelectedTimeSlots, timeSlots, user]);
 
-  const onSelectEvent = (eventClicked) => {
+  const onSelectEvent: (eventClicked: TimeSlot, e: SyntheticEvent) => void = (
+    eventClicked,
+    e,
+  ) => {
     console.log('event selected', eventClicked);
     const newEvents = [...events];
     const idx = newEvents.indexOf(eventClicked);
@@ -84,7 +88,10 @@ const StudyCalendar = ({
     setNumOfSelectedSlots(numOfSelectedSlots + 1);
   };
 
-  const eventStyleSetter = ({ userConfirmed, selected }) => ({
+  const eventStyleSetter: (event: TimeSlot) => object = ({
+    userConfirmed,
+    selected,
+  }) => ({
     className: 'eventButton',
     style: {
       backgroundColor: userConfirmed
@@ -103,8 +110,10 @@ const StudyCalendar = ({
         defaultView='month'
         events={events}
         style={{ height: '70vh' }}
-        onSelectEvent={onSelectEvent}
-        eventPropGetter={eventStyleSetter}
+        onSelectEvent={(obj: object, e: SyntheticEvent) =>
+          onSelectEvent(obj as TimeSlot, e)
+        }
+        eventPropGetter={(obj: object) => eventStyleSetter(obj as TimeSlot)}
         draggableAccessor={(event) => false}
       />
     </div>

@@ -3,7 +3,13 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 // import Login from "../Login.jsx";
 
-const StudyModal = ({ modalOpen, closeModal, _id, user, title }) => (
+const StudyModal: React.FunctionComponent<{
+  modalOpen: boolean;
+  closeModal: () => void;
+  _id: string;
+  user?: User;
+  title: string;
+}> = ({ modalOpen, closeModal, _id, user, title }) => (
   <Modal
     show={modalOpen}
     style={{ opacity: '1' }}

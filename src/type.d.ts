@@ -15,7 +15,7 @@ type Study = {
   inclusion: [string];
   exclusion: [string];
   expectations: string;
-  timeSlots: [string];
+  timeSlots: TimeSlot[];
   datePosted: Date;
 };
 
