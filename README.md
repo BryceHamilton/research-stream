@@ -7,3 +7,5 @@ Client app v1 (admin) demo deployed at: https://research-stream-admin.netlify.ap
 RESTful API: https://github.com/BryceHamilton/researchstreamAPI
 
 Demo Video: https://youtu.be/9gDgFwdnIL4
+
+Credit for concept and design: https://www.facebook.com/researchstream/
